@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: booking-service-app
+  name: booking-service-app
+  namespace: spring-boot-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: booking-service-app
+  template:
+    metadata:
+      labels:
+        app: booking-service-app
+    spec:
+      containers:
+      - image: abushan/booking-service
+        name: booking-service
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        imagePullPolicy: IfNotPresent
+        resources: 
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

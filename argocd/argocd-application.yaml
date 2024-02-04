@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: booking-service-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/ahramadan/booking-service.git
+    targetRevision: HEAD
+    path: kube
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: spring-boot-namespace
