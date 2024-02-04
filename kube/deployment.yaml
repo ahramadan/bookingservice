@@ -16,8 +16,8 @@ spec:
         app: booking-service-app
     spec:
       containers:
-      - image: abushan/booking-service
-        name: booking-service
+      - image: abushan/bookingservice
+        name: bookingservice
         ports:
         - containerPort: 8080
           protocol: TCP
